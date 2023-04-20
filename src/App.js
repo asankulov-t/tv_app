@@ -3,26 +3,29 @@ import React, {useEffect, useState} from "react";
 import AwesomeSlider from 'react-awesome-slider';
 import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
-import Slider from "react-slick";
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import 'swiper/css';
 import {Autoplay, EffectCoverflow, EffectFade, EffectFlip, AnimationEffect, Pagination, EffectCreative} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 const App = () => {
+    const handle = useFullScreenHandle();
     //"https://image.tmdb.org/t/p/w500"
     // "https://api.themoviedb.org/3/movie/now_playing?api_key=f5a9497cc4b806e5898ca24b00f5cf33&language=ru&page=3"
     let [movies,setMovies]=useState();
     const url ="https://64411cb4792fe886a89eaf4b.mockapi.io/tv_data"
   ;
-    useEffect(() => {
-        fetchPopular();
-    }, []);
     const fetchPopular = async () => {
         const data = await fetch(url);
         const res = await data.json();
         setMovies(res)
         console.log(res);
     };
+    useEffect(() => {
+        fetchPopular();
+        document.body.requestFullscreen();
+    }, [fetchPopular]);
+
 
     const settings = {
         dots: true,
