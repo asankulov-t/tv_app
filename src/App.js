@@ -59,20 +59,40 @@ const App = () => {
     return (
         <div className="App">
             {/*{slider}*/}
-            <Swiper spaceBetween={15}
-                    effect={"Creative"}
-                    autoplay={{
-                        delay: 3000,
-                        disableOnInteraction: false,
-                    }}
-                    loop={true}
-                    modules={[Autoplay,EffectCreative]}
-                    className="mySwiper">
+            <Swiper
+                grabCursor={true}
+                effect={"creative"}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }}
+                creativeEffect={{
+                    prev: {
+                        shadow: true,
+                        translate: [0, 0, -400],
+                    },
+                    next: {
+                        translate: ["100%", 0, 0],
+                    },
+                }}
+                modules={[Autoplay, EffectCreative]}
+                className="mySwiper"
+                    // spaceBetween={15}
+                    // effect={"Fade"}
+
+                    // loop={true}
+                    // modules={[Autoplay,EffectFade]}
+                    // className="mySwiper"
+                >
                 {movies&&movies.map((i,t)=>{
                     return <SwiperSlide key={t}><div>
                         <img src={i.poster} alt=""/>
-                        <h3>{i.name}</h3>
-                        <p>{i.description}</p>
+                        <div className={'some_info'}>
+                            <h3>{i.name}</h3>
+                            <p><span>Описание: </span>{i.description}</p>
+                            <p><span>Жанр: </span>{i.janre}</p>
+                            <p className={'age'}><span >Возрастное ограничение: </span>{i.age}+</p>
+                        </div>
                     </div></SwiperSlide>
                 })}
             </Swiper>
