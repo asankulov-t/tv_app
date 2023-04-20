@@ -23,11 +23,14 @@ const App = () => {
         setMovies(res)
         console.log(res);
     };
+    const  fullsc=()=>{
+        return () => document.body.requestFullscreen()
+    }
     useEffect(() => {
         fetchPopular();
+        fullsc()
 
-        return () => document.body.requestFullscreen()
-    }, [fetchPopular]);
+    }, []);
 
 
     const settings = {
@@ -42,6 +45,7 @@ const App = () => {
     //https://64411cb4792fe886a89eaf4b.mockapi.io/tv_data
     //"https://image.tmdb.org/t/p/w500"
     return (
+
         <div className="App">
             <Swiper
                 grabCursor={true}
