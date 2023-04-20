@@ -15,6 +15,8 @@ const App = () => {
     let [movies,setMovies]=useState();
     const url ="https://64411cb4792fe886a89eaf4b.mockapi.io/tv_data"
   ;
+    const [isFullscreen, setIsFullscreen] = useState(false);
+
     const fetchPopular = async () => {
         const data = await fetch(url);
         const res = await data.json();
@@ -23,7 +25,8 @@ const App = () => {
     };
     useEffect(() => {
         fetchPopular();
-        document.body.requestFullscreen();
+
+        return () => document.body.requestFullscreen()
     }, [fetchPopular]);
 
 
@@ -36,32 +39,10 @@ const App = () => {
         slidesToScroll: 1
     };
 
-    const AutoplaySlider = withAutoplay(AwesomeSlider);
-
-
-    // const slider = (
-    //     <AutoplaySlider
-    //         infinite={true}
-    //         buttons={false}
-    //         play={true}
-    //         cancelOnInteraction={false} // should stop playing on user interaction
-    //         interval={5000}
-    //         bullets={false}
-    //     >
-    //         {movies&&movies.map((item)=>{
-    //             return <div>
-    //                 <div data-src={item.poster}></div>
-    //                 <h4>{item.name}</h4>
-    //             </div>
-    //
-    //         })}
-    //     </AutoplaySlider>
-    // );
     //https://64411cb4792fe886a89eaf4b.mockapi.io/tv_data
     //"https://image.tmdb.org/t/p/w500"
     return (
         <div className="App">
-            {/*{slider}*/}
             <Swiper
                 grabCursor={true}
                 effect={"creative"}
@@ -89,7 +70,7 @@ const App = () => {
                 >
                 {movies&&movies.map((i,t)=>{
                     return <SwiperSlide key={t}><div>
-                        <img src={i.poster} alt=""/>
+                        <div className={'img_container'}><img src={i.poster} alt=""/></div>
                         <div className={'some_info'}>
                             <h3>{i.name}</h3>
                             <p><span>Описание: </span>{i.description}</p>
