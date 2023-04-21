@@ -19,12 +19,14 @@ const App = () => {
         const res = await data.json();
         setMovies(res)
         console.log(res);
+        let e= await document.getElementById('fullScreen');
+        e?.requestFullscreen()
     };
 
     useEffect(() => {
         fetchPopular();
-        let e=document.getElementById('fullScreen');
-        e?.requestFullscreen()
+
+
     }, [goFull]);
 
 
@@ -46,7 +48,7 @@ const App = () => {
                 grabCursor={true}
                 effect={"creative"}
                 autoplay={{
-                    delay: 3000,
+                    delay: 5000,
                     disableOnInteraction: false,
                 }}
                 creativeEffect={{

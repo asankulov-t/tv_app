@@ -1,8 +1,8 @@
 .App {
   text-align: center;
   margin: 0 auto;
-  max-width: 1080px;
-  max-height: 1920px;
+  width: 1080px;
+  height: 1920px;
 }
 .img_container{
   width: 100%;
@@ -11,8 +11,7 @@
 img{
   margin-top: 0;
   width: 1080px;
-  height: 860px;
-  object-fit: fill!important;
+  object-fit: cover!important;
 }
 .some_info{
   position: relative;
