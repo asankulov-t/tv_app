@@ -1,21 +1,18 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
-import AwesomeSlider from 'react-awesome-slider';
-import withAutoplay from 'react-awesome-slider/dist/autoplay';
 import 'react-awesome-slider/dist/styles.css';
-import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import 'swiper/css';
 import {Autoplay, EffectCoverflow, EffectFade, EffectFlip, AnimationEffect, Pagination, EffectCreative} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 const App = () => {
-    const handle = useFullScreenHandle();
+    const [goFull,setGoFull]=useState(false)
+
     //"https://image.tmdb.org/t/p/w500"
     // "https://api.themoviedb.org/3/movie/now_playing?api_key=f5a9497cc4b806e5898ca24b00f5cf33&language=ru&page=3"
     let [movies,setMovies]=useState();
     const url ="https://64411cb4792fe886a89eaf4b.mockapi.io/tv_data"
   ;
-    const [isFullscreen, setIsFullscreen] = useState(false);
 
     const fetchPopular = async () => {
         const data = await fetch(url);
@@ -23,14 +20,12 @@ const App = () => {
         setMovies(res)
         console.log(res);
     };
-    const  fullsc=()=>{
-        return () => document.body.requestFullscreen()
-    }
+
     useEffect(() => {
         fetchPopular();
-
-
-    }, []);
+        let e=document.getElementById('fullScreen');
+        e?.requestFullscreen()
+    }, [goFull]);
 
 
     const settings = {
@@ -46,7 +41,7 @@ const App = () => {
     //"https://image.tmdb.org/t/p/w500"
     return (
 
-        <div className="App">
+        <div onClick={(e)=>{setGoFull(!goFull)}} className="App" id="fullScreen">
             <Swiper
                 grabCursor={true}
                 effect={"creative"}
