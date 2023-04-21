@@ -1,6 +1,5 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
-import 'react-awesome-slider/dist/styles.css';
 import 'swiper/css';
 import {Autoplay, EffectCoverflow, EffectFade, EffectFlip, AnimationEffect, Pagination, EffectCreative} from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
